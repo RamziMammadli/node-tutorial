@@ -11,7 +11,6 @@ const createBook = async (req, res) => {
 
   let newBook = { name, author, publishedDate, inStock };
 
-
   try {
     BookItem.create(newBook);
     res.json(newBook);
@@ -20,4 +19,25 @@ const createBook = async (req, res) => {
   }
 };
 
-export { getBooks, createBook };
+const deleteBook =  async (req,res) => {
+  const {id} = req.params
+
+  const item = await BookItem.findByIdAndDelete(id)
+
+  res.json(`data silindi`)
+
+}
+
+const updateBook = async(req,res) => {
+  const {id} = req.params
+
+  const {name, author, publishedDate, inStock} = req.body
+
+  const book = {name,author,publishedDate,inStock}
+
+  const updatedBook = await BookItem.findByIdAndUpdate(id, book )
+
+  res.json('data updated')
+}
+
+export { getBooks, createBook,deleteBook, updateBook };
