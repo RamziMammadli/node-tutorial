@@ -12,7 +12,7 @@ const createBook = async (req, res) => {
   let newBook = { name, author, publishedDate, inStock };
 
   try {
-    BookItem.create(newBook);
+    await BookItem.create(newBook);
     res.json(newBook);
   } catch (error) {
     console.log(error);
